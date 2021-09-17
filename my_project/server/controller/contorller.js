@@ -68,13 +68,12 @@ exports.getTotalCostByCategory = (req,res)=>{
     const cate_name = req.query.id;
     Userdb.find({ 'category':cate_name }).sort({date: -1 }).then(data =>{
         if(!data){
-            res.status(404).send({ message : "Not found user with id "+ id})
+            res.status(404).send({ message : "Not found category name "+ id})
         }else{
             res.send(data)
         }
-    })
-    .catch(err =>{
-        res.status(500).send({ message: "Erro retrieving user with id " + id})
+    }) .catch(err =>{
+        res.status(500).send({ message: "Error retrieving category with " + id})
     })
 }
 

@@ -25,6 +25,11 @@ exports.specific_category = (req,res)=>{
 
 }
 
+exports.catogry_filter = (req,res)=>{
+   res.render('categoryfilter');
+
+}
+
 exports.add_user = (req, res) =>{
     res.render('add_expense');
 }
