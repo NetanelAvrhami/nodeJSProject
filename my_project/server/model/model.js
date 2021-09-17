@@ -9,6 +9,7 @@ var schema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    date : Date,
     description : String,
 })
 

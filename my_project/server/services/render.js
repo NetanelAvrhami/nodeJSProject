@@ -14,6 +14,17 @@ exports.homeRoutes = (req, res) => {
     
 }
 
+exports.specific_category = (req,res)=>{
+    axios.get('http://localhost:3000/api/categories', { params : { id : req.query.id }})
+    .then(function(userdata){
+        res.render("category", { users : userdata.data})
+    })
+    .catch(err =>{
+        res.send(err);
+    })
+
+}
+
 exports.add_user = (req, res) =>{
     res.render('add_expense');
 }

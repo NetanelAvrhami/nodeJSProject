@@ -12,6 +12,7 @@ exports.create = (req,res)=>{
     const user = new Userdb({
         cost : req.body.cost,
         category : req.body.category,
+        date : req.body.date,
         description: req.body.description,
     })
 
@@ -20,7 +21,7 @@ exports.create = (req,res)=>{
         .save(user)
         .then(data => {
             //res.send(data)
-            res.redirect('/add-expense');
+            res.redirect('/');
         })
         .catch(err =>{
             res.status(500).send({
@@ -49,7 +50,7 @@ exports.find = (req, res)=>{
             })
 
     }else{
-        Userdb.find()
+        Userdb.find().sort({ date : -1 })
             .then(user => {
                 res.send(user)
             })
@@ -61,8 +62,20 @@ exports.find = (req, res)=>{
     
 }
 
+
 exports.getTotalCostByCategory = (req,res)=>{
-    
+
+    const cate_name = req.query.id;
+    Userdb.find({ 'category':cate_name }).sort({date: -1 }).then(data =>{
+        if(!data){
+            res.status(404).send({ message : "Not found user with id "+ id})
+        }else{
+            res.send(data)
+        }
+    })
+    .catch(err =>{
+        res.status(500).send({ message: "Erro retrieving user with id " + id})
+    })
 }
 
 // Update a new idetified user by user id
