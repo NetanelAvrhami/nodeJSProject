@@ -64,11 +64,13 @@ exports.find = (req, res)=>{
 
 exports.getTotalCostByDates = (req,res)=>{
 
-    const date_name = req.query.id;
-    console.log("date_name:",date_name)
+    const month_name = req.query.month;
+    const year_name = req.query.year;
+    console.log("date_name:",month_name)
+    console.log("year_name:",year_name)
 
-    ///{ "$expr":{"$and":[ { "$eq": [{ "$month": "$date" }, Number(month)]},{ "$eq": [{ "$year": "$date" }, Number(year)]}] }}
-    Userdb.find({ "$expr": { "$eq": [{ "$month": "$date" }, Number(date_name)] } }).then(data =>{
+    Userdb.find( { "$expr":{"$and":[ { "$eq": [{ "$month": "$date" }, Number(month_name)]},{ "$eq": [{ "$year": "$date" }, Number(year_name)]}] }}
+    ).then(data =>{
         console.log("data:",data)
         if(!data){
             res.status(404).send({ message : "Not found category name "+ date_name})

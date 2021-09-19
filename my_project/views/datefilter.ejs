@@ -16,8 +16,8 @@
  <form method="GET" id="date_filter" action="/see_date">
     <div class="new_user">
         <div class="form-group">
-            <label for="id" class="text-light">Date</label>
-            <select name="id" id="months">
+            <label for="month" class="text-light">Month</label>
+            <select name="month" id="months">
                 <option value="1">January</option>
                 <option value="2">February </option>
                 <option value="3">March</option>
@@ -32,7 +32,18 @@
                 <option value="12">December</option>
             </select>
         </div> 
-        
+
+
+        <div class="form-group">
+            <label for="year" class="text-light">Year</label>
+            <select name="year" id="years">
+                <option value="2021">2021</option>
+                <option value="2020">2020 </option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+            </select>
+        </div> 
         <div class="form-group">
             <button type="submit" class="btn text-dark update">Search</button>
         </div>

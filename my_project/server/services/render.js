@@ -26,7 +26,7 @@ exports.specific_category = (req,res)=>{
 }
 
 exports.specific_date = (req,res)=>{
-    axios.get('http://localhost:3000/api/date', { params : { id : req.query.id }})
+    axios.get('http://localhost:3000/api/date', { params : { month : req.query.month,year:req.query.year }})
     .then(function(userdata){
         res.render("date", { users : userdata.data})
     })
