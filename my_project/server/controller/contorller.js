@@ -62,6 +62,23 @@ exports.find = (req, res)=>{
     
 }
 
+exports.getTotalCostByDates = (req,res)=>{
+
+    const date_name = req.query.id;
+    console.log("date_name:",date_name)
+
+    ///{ "$expr":{"$and":[ { "$eq": [{ "$month": "$date" }, Number(month)]},{ "$eq": [{ "$year": "$date" }, Number(year)]}] }}
+    Userdb.find({ "$expr": { "$eq": [{ "$month": "$date" }, Number(date_name)] } }).then(data =>{
+        console.log("data:",data)
+        if(!data){
+            res.status(404).send({ message : "Not found category name "+ date_name})
+        }else{
+            res.send(data)
+        }
+    }) .catch(err =>{
+        res.status(500).send({ message: "Error retrieving category with " + date_name})
+    })
+}
 
 exports.getTotalCostByCategory = (req,res)=>{
 
