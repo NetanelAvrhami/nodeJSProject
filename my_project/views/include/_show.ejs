@@ -1,17 +1,17 @@
-<% for(var i = 0; i < users.length; i++) { %>
+<% for(var i = 0; i < expenses.length; i++) { %>
 <tr>
-    <% var newDate = new Date(`${users[i].date}`);
+    <% var newDate = new Date(`${expenses[i].date}`);
     var year = newDate.getFullYear();
     var mes = newDate.getMonth()+1;
     var dia = newDate.getDate();
     var fecha =dia+"-"+mes+"-"+year;
     %>
     <td><%= fecha;%></td>
-    <td><%= users[i].category;%></td>
-    <td><%= users[i].cost;%></td>
-    <td><%= users[i].description;%></td>
+    <td><%= expenses[i].category;%></td>
+    <td><%= expenses[i].cost;%></td>
+    <td><%= expenses[i].description;%></td>
     <td>
-        <a class="btn border-shadow delete" data-id=<%= users[i]._id;%> >
+        <a class="btn border-shadow delete" data-id=<%= expenses[i]._id;%> >
             <span class="text-gradient"><i class="fas fa-times"></i></span>
         </a>
     </td>
