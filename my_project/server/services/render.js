@@ -25,10 +25,26 @@ exports.specific_category = (req,res)=>{
 
 }
 
-exports.catogry_filter = (req,res)=>{
-   res.render('categoryfilter');
+exports.specific_date = (req,res)=>{
+    axios.get('http://localhost:3000/api/date', { params : { month : req.query.month,year:req.query.year }})
+    .then(function(userdata){
+        res.render("date", { users : userdata.data})
+    })
+    .catch(err =>{
+        res.send(err);
+    })
 
 }
+
+exports.date_filter = (req,res)=>{
+   res.render('datefilter');
+
+}
+
+exports.catogry_filter = (req,res)=>{
+    res.render('categoryfilter');
+ 
+ }
 
 exports.add_user = (req, res) =>{
     res.render('add_expense');

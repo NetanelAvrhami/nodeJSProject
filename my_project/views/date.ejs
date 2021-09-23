@@ -7,21 +7,10 @@
     <main id="site-main">
         <div class="container">
             <div class="box-nav d-flex justify-between">
-                <a href="/add-expense" class="border-shadow">
-                    <span class="text-gradient">New Expense <i class="fas fa-user"></i></span>
-                </a>
-            </div>
-            <div class="box-nav d-flex justify-between">
-                <a href="/filterbycategory" class="border-shadow">
-                    <span class="text-gradient">Filter By Category </span>
-                </a>
-            </div>
-            <div class="box-nav d-flex justify-between">
-                <a href="/filterbydate" class="border-shadow">
-                    <span class="text-gradient">Filter By Date</span>
-                </a>
-            </div>
-
+                <div class="filter">
+                    <a href="/"><i class="fas fa-angle-double-left"></i> All Expenses</a>
+                </div>
+             </div>
             <!-- form handling -->
             <form action="/" method="POST">
                 <table class="table">
@@ -29,12 +18,12 @@
                         <tr>
                             <th>Date</th>
                             <th>Category</th>
-                            <th>Cost</th>
                             <th>Description</th>
+                            <th>Cost</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <%- include('include/_show') %>
+                        <%- include('include/_showcustomDate') %>
                     </tbody>
                 </table>
             </form>

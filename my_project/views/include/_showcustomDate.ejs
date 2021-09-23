@@ -1,5 +1,7 @@
 <% var sum = 0; %>
-<span class="container" ><%=`${users[0].category}` %> </span>
+
+
+<span class="container" ><%=`${users[0].date}` %> </span>
 <% for(var i = 0; i < users.length; i++) { %>
     <tr>
         <% var newDate = new Date(`${users[i].date}`);
@@ -17,6 +19,6 @@
     <% } %>
     <tr>
         <td>TOTAL</td>
-        <td>All Expenses in This Category</td>
+        <td>All Expenses in This Date</td>
         <td><%= sum %></td>
     </tr>
