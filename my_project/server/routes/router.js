@@ -13,11 +13,11 @@ route.get('/filterbydate', services.date_filter);
 
 
 //API
-route.post('/api/users',controller.create);
-route.get('/api/users',controller.find);
+route.post('/api/expenses',controller.create);
+route.get('/api/expenses',controller.find);
 route.get('/api/categories',controller.getTotalCostByCategory);
 route.get('/api/date',controller.getTotalCostByDates);
-route.delete('/api/users/:id',controller.delete);
+route.delete('/api/expenses/:id',controller.delete);
 
 
 

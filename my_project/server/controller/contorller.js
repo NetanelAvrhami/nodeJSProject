@@ -9,7 +9,7 @@ exports.create = (req,res)=>{
     }
 
     // new expense
-    const user = new ExpenseDb({
+    const expense = new ExpenseDb({
         cost : req.body.cost,
         category : req.body.category,
         date : req.body.date,
@@ -17,8 +17,8 @@ exports.create = (req,res)=>{
     });
 
     // save expense in the database
-    user
-        .save(user)
+    expense
+        .save(expense)
         .then(data => {
             res.redirect('/');
         })
@@ -50,8 +50,8 @@ exports.find = (req, res)=>{
 
     }else{
         ExpenseDb.find().sort({ date : -1 })
-            .then(user => {
-                res.send(user);
+            .then(expense => {
+                res.send(expense);
             })
             .catch(err => {
                 res.status(500).send({ message : err.message || "Error Occurred while retriving expense information" });
@@ -91,7 +91,7 @@ exports.getTotalCostByCategory = (req,res)=>{
 };
 
 
-// Delete a expense with specified user id in the request
+// Delete a expense with specified expense id in the request
 exports.delete = (req, res)=>{
     const id = req.params.id;
 

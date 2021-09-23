@@ -1,20 +1,20 @@
 <% var sum = 0; %>
 
-<span class="container" ><%=`${users[0].date}` ;%> </span>
-<% for(var i = 0; i < users.length; i++) { %>
+<span class="container" ><%=`${expenses[0].date}` ;%> </span>
+<% for(var i = 0; i < expenses.length; i++) { %>
     <tr>
-        <% var newDate = new Date(`${users[i].date}`);
+        <% var newDate = new Date(`${expenses[i].date}`);
         var year = newDate.getFullYear();
         var mes = newDate.getMonth()+1;
         var dia = newDate.getDate();
         var fecha =dia+"-"+mes+"-"+year;
         %>
         <td><%= fecha;%></td>
-        <td><%= users[i].category;%></td>
-        <td><%= users[i].description;%></td>
-        <td><%= users[i].cost ;%></td> 
+        <td><%= expenses[i].category;%></td>
+        <td><%= expenses[i].description;%></td>
+        <td><%= expenses[i].cost ;%></td> 
     </tr>
-    <% sum = +sum + +users[i].cost;%>
+    <% sum = +sum + +expenses[i].cost;%>
     <% }; %>
     <tr>
         <td>TOTAL</td>

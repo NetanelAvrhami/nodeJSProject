@@ -2,10 +2,10 @@ const axios = require('axios');
 
 
 exports.homeRoutes = (req, res) => {
-    // Make a get request to /api/users
-    axios.get('http://localhost:3000/api/users')
+    // Make a get request to /api/expenses
+    axios.get('http://localhost:3000/api/expenses')
         .then(function(response){
-            res.render('index', { users : response.data });
+            res.render('index', { expenses : response.data });
         })
         .catch(err =>{
             res.send(err);
@@ -14,8 +14,8 @@ exports.homeRoutes = (req, res) => {
 
 exports.specific_category = (req,res)=>{
     axios.get('http://localhost:3000/api/categories', { params : { id : req.query.id }})
-    .then(function(userdata){
-        res.render("category", { users : userdata.data});
+    .then(function(expensedata){
+        res.render("category", { expenses : expensedata.data});
     })
     .catch(err =>{
         res.send(err);
@@ -24,8 +24,8 @@ exports.specific_category = (req,res)=>{
 
 exports.specific_date = (req,res)=>{
     axios.get('http://localhost:3000/api/date', { params : { month : req.query.month,year:req.query.year }})
-    .then(function(userdata){
-        res.render("date", { users : userdata.data});
+    .then(function(expensedata){
+        res.render("date", { expenses : expensedata.data});
     })
     .catch(err =>{
         res.send(err);
