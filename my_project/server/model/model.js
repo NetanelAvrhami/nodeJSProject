@@ -11,8 +11,8 @@ var schema = new mongoose.Schema({
     },
     date : Date,
     description : String,
-})
+});
 
-const Userdb = mongoose.model('userdb', schema);
+const UserDb = mongoose.model('userDb', schema);
 
-module.exports = Userdb;
+module.exports = UserDb;
