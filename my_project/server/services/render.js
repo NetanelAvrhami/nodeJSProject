@@ -10,56 +10,40 @@ exports.homeRoutes = (req, res) => {
         .catch(err =>{
             res.send(err);
         })
-
-    
-}
+};
 
 exports.specific_category = (req,res)=>{
     axios.get('http://localhost:3000/api/categories', { params : { id : req.query.id }})
     .then(function(userdata){
-        res.render("category", { users : userdata.data})
+        res.render("category", { users : userdata.data});
     })
     .catch(err =>{
         res.send(err);
-    })
-
-}
+    });
+};
 
 exports.specific_date = (req,res)=>{
     axios.get('http://localhost:3000/api/date', { params : { month : req.query.month,year:req.query.year }})
     .then(function(userdata){
-        res.render("date", { users : userdata.data})
+        res.render("date", { users : userdata.data});
     })
     .catch(err =>{
         res.send(err);
-    })
-
-}
+    });
+};
 
 exports.date_filter = (req,res)=>{
-   res.render('datefilter');
-
-}
+   res.render('date_filter');
+};
 
 exports.catogry_filter = (req,res)=>{
-    res.render('categoryfilter');
- 
- }
+    res.render('category_filter');
+ };
 
-exports.add_user = (req, res) =>{
+exports.add_expense = (req, res) =>{
     res.render('add_expense');
-}
+};
 
 exports.register = (req, res) =>{
     res.render('register');
-}
-
-exports.update_user = (req, res) =>{
-    axios.get('http://localhost:3000/api/users', { params : { id : req.query.id }})
-        .then(function(userdata){
-            res.render("update_user", { user : userdata.data})
-        })
-        .catch(err =>{
-            res.send(err);
-        })
-}
+};

@@ -1,6 +1,6 @@
-var Userdb = require('../model/model');
+var ExpenseDb = require('../model/model');
 
-// create and save new user
+// create and save new expense
 exports.create = (req,res)=>{
     // validate request
     if(!req.body){
@@ -8,19 +8,18 @@ exports.create = (req,res)=>{
         return;
     }
 
-    // new user
-    const user = new Userdb({
+    // new expense
+    const user = new ExpenseDb({
         cost : req.body.cost,
         category : req.body.category,
         date : req.body.date,
         description: req.body.description,
-    })
+    });
 
-    // save user in the database
+    // save expense in the database
     user
         .save(user)
         .then(data => {
-            //res.send(data)
             res.redirect('/');
         })
         .catch(err =>{
@@ -29,112 +28,86 @@ exports.create = (req,res)=>{
             });
         });
 
-}
+};
 
-// retrieve and return all users/ retrive and return a single user
+// retrieve and return all expenses/ retrive and return a single expense
 exports.find = (req, res)=>{
 
     if(req.query.id){
         const id = req.query.id;
 
-        Userdb.findById(id)
+        ExpenseDb.findById(id)
             .then(data =>{
                 if(!data){
-                    res.status(404).send({ message : "Not found user with id "+ id})
+                    res.status(404).send({ message : "Not found expense with id "+ id});
                 }else{
-                    res.send(data)
+                    res.send(data);
                 }
             })
             .catch(err =>{
-                res.status(500).send({ message: "Erro retrieving user with id " + id})
-            })
+                res.status(500).send({ message: "Error retrieving expense with id " + id});
+            });
 
     }else{
-        Userdb.find().sort({ date : -1 })
+        ExpenseDb.find().sort({ date : -1 })
             .then(user => {
-                res.send(user)
+                res.send(user);
             })
             .catch(err => {
-                res.status(500).send({ message : err.message || "Error Occurred while retriving user information" })
-            })
+                res.status(500).send({ message : err.message || "Error Occurred while retriving expense information" });
+            });
     }
-
-    
-}
+};
 
 exports.getTotalCostByDates = (req,res)=>{
 
-    const month_name = req.query.month;
-    const year_name = req.query.year;
-    console.log("date_name:",month_name)
-    console.log("year_name:",year_name)
+    const monthName = req.query.month;
+    const yearName = req.query.year;
 
-    Userdb.find( { "$expr":{"$and":[ { "$eq": [{ "$month": "$date" }, Number(month_name)]},{ "$eq": [{ "$year": "$date" }, Number(year_name)]}] }}
+    ExpenseDb.find( { "$expr":{"$and":[ { "$eq": [{ "$month": "$date" }, Number(monthName)]},{ "$eq": [{ "$year": "$date" }, Number(yearName)]}] }}
     ).then(data =>{
-        console.log("data:",data)
         if(!data){
-            res.status(404).send({ message : "Not found category name "+ date_name})
+            res.status(404).send({ message : "Not found category name "+ date_name});
         }else{
-            res.send(data)
+            res.send(data);
         }
     }) .catch(err =>{
-        res.status(500).send({ message: "Error retrieving category with " + date_name})
-    })
-}
+        res.status(500).send({ message: "Error retrieving category with " + date_name});
+    });
+};
 
 exports.getTotalCostByCategory = (req,res)=>{
 
-    const cate_name = req.query.id;
-    Userdb.find({ 'category':cate_name }).sort({date: -1 }).then(data =>{
+    const cateName = req.query.id;
+    ExpenseDb.find({ 'category':cateName }).sort({date: -1 }).then(data =>{
         if(!data){
-            res.status(404).send({ message : "Not found category name "+ id})
+            res.status(404).send({ message : "Not found category name "+ id});
         }else{
-            res.send(data)
+            res.send(data);
         }
     }) .catch(err =>{
-        res.status(500).send({ message: "Error retrieving category with " + id})
-    })
-}
+        res.status(500).send({ message: "Error retrieving category with " + id});
+    });
+};
 
-// Update a new idetified user by user id
-exports.update = (req, res)=>{
-    if(!req.body){
-        return res
-            .status(400)
-            .send({ message : "Data to update can not be empty"})
-    }
 
-    const id = req.params.id;
-    Userdb.findByIdAndUpdate(id, req.body, { useFindAndModify: false})
-        .then(data => {
-            if(!data){
-                res.status(404).send({ message : `Cannot Update user with ${id}. Maybe user not found!`})
-            }else{
-                res.send(data)
-            }
-        })
-        .catch(err =>{
-            res.status(500).send({ message : "Error Update user information"})
-        })
-}
-
-// Delete a user with specified user id in the request
+// Delete a expense with specified user id in the request
 exports.delete = (req, res)=>{
     const id = req.params.id;
 
-    Userdb.findByIdAndDelete(id)
+    ExpenseDb.findByIdAndDelete(id)
         .then(data => {
             if(!data){
-                res.status(404).send({ message : `Cannot Delete with id ${id}. Maybe id is wrong`})
+                res.status(404).send({ message : `Cannot Delete with id ${id}. Maybe id is wrong`});
             }else{
                 res.send({
-                    message : "User was deleted successfully!"
-                })
-            }
+                    message : "expense was deleted successfully!"
+                });
+            };
         })
         .catch(err =>{
             res.status(500).send({
-                message: "Could not delete User with id=" + id
+                message: "Could not delete expense with id=" + id
             });
         });
-}
+};
